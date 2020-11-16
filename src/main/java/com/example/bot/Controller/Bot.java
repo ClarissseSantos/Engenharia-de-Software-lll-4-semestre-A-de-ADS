@@ -1,4 +1,4 @@
-package com.example.bot;
+package com.example.bot.Controller;
 
 import java.util.Collections;
 
