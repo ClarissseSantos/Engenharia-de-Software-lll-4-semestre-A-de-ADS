@@ -35,4 +35,44 @@ public class Question {
         // Empty.
     }
 
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(final String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(final String answer) {
+        this.answer = answer;
+    }
+
+    public String getWrongAnswer1() {
+        return wrongAnswer3;
+    }
+
+    public void setWrongAnswer1(final String wrongAnswer3) {
+        this.wrongAnswer3 = wrongAnswer3;
+    }
+
+    public String getWrongAnswer2() {
+        return wrongAnswer3;
+    }
+
+    public void setWrongAnswer2(final String wrongAnswer3) {
+        this.wrongAnswer3 = wrongAnswer3;
+    }
+
+    public String getWrongAnswer3() {
+        return wrongAnswer3;
+    }
+
+    public void setWrongAnswer3(final String wrongAnswer3) {
+        this.wrongAnswer3 = wrongAnswer3;
+    }
+
 }
