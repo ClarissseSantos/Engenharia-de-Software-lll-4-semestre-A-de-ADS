@@ -4,11 +4,12 @@ import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -18,9 +19,10 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final Integer id = null;
 
-    @Column(name = "user")
+    @JoinColumn(name = "author")
+    @ManyToOne
     @NotNull
-    private User user;
+    private TelegramUser author;
 
     @NotNull
     private Date next;
@@ -37,8 +39,6 @@ public class Answer {
         final Date today = new Date();
 
         int diff = (int) Duration.between(today.toInstant(), getNext().toInstant()).toDays();
-
-        final Calendar calendar = Calendar.getInstance();
 
         diff = diff * (int) Math.round(getEase());
 
@@ -59,6 +59,8 @@ public class Answer {
             default:
                 throw new IndexOutOfBoundsException("Answer " + answer + " is out of bounds!");
         }
+
+        final Calendar calendar = Calendar.getInstance();
         
         calendar.setTime(today);
         calendar.add(Calendar.DATE, diff);
@@ -66,12 +68,12 @@ public class Answer {
         setNext(calendar.getTime());
     }
 
-    public User getUser() {
-        return user;
+    public TelegramUser getAuthor() {
+        return author;
     }
 
-    public void setUser(final User user) {
-        this.user = user;
+    public void setAuthor(final TelegramUser author) {
+        this.author = author;
     }
 
     public Date getNext() {
