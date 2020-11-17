@@ -13,7 +13,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id = null;
+    private final Integer id = null;
 
     @OneToMany(mappedBy = "author")
     private List<Answer> answers;

@@ -12,7 +12,7 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id = null;
+    private final Integer id = null;
 
     @Column(unique = true)
     @NotNull

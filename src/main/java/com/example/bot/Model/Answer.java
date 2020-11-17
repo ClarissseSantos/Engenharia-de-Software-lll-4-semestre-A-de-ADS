@@ -16,7 +16,7 @@ public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id = null;
+    private final Integer id = null;
 
     @Column(name = "user")
     @NotNull
