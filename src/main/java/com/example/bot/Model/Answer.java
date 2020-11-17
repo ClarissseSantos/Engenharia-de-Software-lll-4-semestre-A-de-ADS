@@ -2,6 +2,7 @@ package com.example.bot.Model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final Long id = null;
 
+    @Column(name = "user")
     @NotNull
     private User user;
 
