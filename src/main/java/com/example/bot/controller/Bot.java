@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.example.bot.service.TelegramUserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -15,25 +18,44 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Component
 public class Bot extends TelegramLongPollingBot {
 
+    @Autowired
+    private TelegramUserService telegramUserService;
+
+    private InlineKeyboardMarkup getInlineKeyboardMarkup() {
+        final List<InlineKeyboardButton> keyboard = new ArrayList<InlineKeyboardButton>(4);
+
+        keyboard.add(new InlineKeyboardButton().setText("Again").setCallbackData("0"));
+        keyboard.add(new InlineKeyboardButton().setText("Hard").setCallbackData("1"));
+        keyboard.add(new InlineKeyboardButton().setText("Good").setCallbackData("2"));
+        keyboard.add(new InlineKeyboardButton().setText("Easy").setCallbackData("3"));
+
+        final InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup()
+            .setKeyboard(Collections.singletonList(keyboard));
+
+        inlineKeyboardMarkup.setKeyboard(Collections.singletonList(keyboard));
+
+        return inlineKeyboardMarkup;
+    }
+
     @Override
     public void onUpdateReceived(final Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            final List<InlineKeyboardButton> keyboard = new ArrayList<InlineKeyboardButton>(4);
+            final Integer id = update.getMessage().getFrom().getId();
 
-            keyboard.add(new InlineKeyboardButton().setText("Again").setCallbackData("0"));
-            keyboard.add(new InlineKeyboardButton().setText("Hard").setCallbackData("1"));
-            keyboard.add(new InlineKeyboardButton().setText("Good").setCallbackData("2"));
-            keyboard.add(new InlineKeyboardButton().setText("Easy").setCallbackData("3"));
+            final String text;
 
-            final InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup()
-                .setKeyboard(Collections.singletonList(keyboard));
+            if(telegramUserService.seen(id)) {
+                text = "I have seen you before.";
+            } else {
+                text = "I have never seen you before.";
+            }
 
-            inlineKeyboardMarkup.setKeyboard(Collections.singletonList(keyboard));
+            telegramUserService.save(id);
 
             final SendMessage message = new SendMessage()
                     .setChatId(update.getMessage().getChatId())
-                    .setText(update.getMessage().getText())
-                    .setReplyMarkup(inlineKeyboardMarkup);
+                    .setText(text)
+                    .setReplyMarkup(getInlineKeyboardMarkup());
 
             try {
                 execute(message);
