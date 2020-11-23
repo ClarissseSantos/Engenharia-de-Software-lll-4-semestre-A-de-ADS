@@ -1,4 +1,4 @@
-package com.example.bot.Model;
+package com.example.bot.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

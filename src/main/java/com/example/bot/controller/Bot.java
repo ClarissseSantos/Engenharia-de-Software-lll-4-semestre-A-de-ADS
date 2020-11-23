@@ -1,4 +1,4 @@
-package com.example.bot.Controller;
+package com.example.bot.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,7 +50,7 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
-        return "1360576894:AAFKVForkADH4dW58RkVGbn-9JdRXXW-Vf8";
+        return "1402811436:AAF7uT_xC-4OJNK2QiYJbUAbRzhquC9vKqY";
     }
 
 }

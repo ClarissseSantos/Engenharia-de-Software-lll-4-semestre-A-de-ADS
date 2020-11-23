@@ -1,6 +1,6 @@
 package com.example.bot.repository;
 
-import com.example.bot.Model.Answer;
+import com.example.bot.model.Answer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

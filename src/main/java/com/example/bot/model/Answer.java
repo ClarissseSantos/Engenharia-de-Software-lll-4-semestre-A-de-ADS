@@ -1,4 +1,4 @@
-package com.example.bot.Model;
+package com.example.bot.model;
 
 import java.time.Duration;
 import java.util.Calendar;
